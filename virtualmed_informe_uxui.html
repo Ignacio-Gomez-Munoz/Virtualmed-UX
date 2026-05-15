@@ -1,0 +1,1334 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VirtualMed · Informe UX/UI — Tiquitaca · Mayo 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Google+Sans+Display:wght@400;700&family=Roboto:wght@300;400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+<style>
+  :root {
+    --blue-900: #0d47a1;
+    --blue-800: #1565c0;
+    --blue-700: #1976d2;
+    --blue-600: #1e88e5;
+    --blue-50:  #e3f2fd;
+    --teal-700: #00796b;
+    --teal-500: #009688;
+    --teal-50:  #e0f2f1;
+    --red-700:  #c62828;
+    --red-600:  #e53935;
+    --red-50:   #ffebee;
+    --amber-700:#f57f17;
+    --amber-500:#ffc107;
+    --amber-50: #fff8e1;
+    --green-700:#2e7d32;
+    --green-500:#4caf50;
+    --green-50: #e8f5e9;
+    --grey-900: #212121;
+    --grey-800: #424242;
+    --grey-700: #616161;
+    --grey-500: #9e9e9e;
+    --grey-300: #e0e0e0;
+    --grey-100: #f5f5f5;
+    --grey-50:  #fafafa;
+    --white:    #ffffff;
+    --surface:  #ffffff;
+    --on-surface: #212121;
+    --shadow-1: 0 1px 3px rgba(0,0,0,.12), 0 1px 2px rgba(0,0,0,.24);
+    --shadow-2: 0 3px 6px rgba(0,0,0,.15), 0 2px 4px rgba(0,0,0,.12);
+    --shadow-3: 0 10px 20px rgba(0,0,0,.10), 0 3px 6px rgba(0,0,0,.08);
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 24px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Roboto', sans-serif;
+    background: #f0f4f8;
+    color: var(--grey-900);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--white);
+    border-bottom: 1px solid var(--grey-300);
+    padding: 0 32px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    height: 64px;
+    box-shadow: var(--shadow-1);
+  }
+  .nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
+  .nav-logo {
+    width: 32px; height: 32px;
+    background: var(--blue-700);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .nav-logo span { color: #fff; font-size: 16px; }
+  .nav-title {
+    font-family: 'Google Sans', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--grey-900);
+    letter-spacing: -.2px;
+  }
+  .nav-divider { width: 1px; height: 24px; background: var(--grey-300); }
+  .nav-subtitle {
+    font-size: 13px;
+    color: var(--grey-700);
+    font-family: 'Roboto', sans-serif;
+  }
+  .nav-spacer { flex: 1; }
+  .nav-chip {
+    background: var(--blue-50);
+    color: var(--blue-800);
+    font-size: 12px;
+    font-weight: 500;
+    padding: 4px 12px;
+    border-radius: 100px;
+    font-family: 'Google Sans', sans-serif;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(135deg, var(--blue-900) 0%, var(--blue-700) 60%, var(--teal-500) 100%);
+    color: var(--white);
+    padding: 72px 48px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  .hero-inner { position: relative; max-width: 900px; }
+  .hero-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255,255,255,.15);
+    border: 1px solid rgba(255,255,255,.25);
+    border-radius: 100px;
+    padding: 4px 14px 4px 8px;
+    font-size: 12px;
+    font-family: 'Google Sans', sans-serif;
+    font-weight: 500;
+    margin-bottom: 20px;
+    letter-spacing: .3px;
+  }
+  .hero-label .material-icons-round { font-size: 14px; }
+  .hero h1 {
+    font-family: 'Google Sans Display', sans-serif;
+    font-size: clamp(32px, 5vw, 52px);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -1px;
+    margin-bottom: 16px;
+  }
+  .hero h1 span { color: rgba(255,255,255,.65); }
+  .hero-sub {
+    font-size: 17px;
+    color: rgba(255,255,255,.8);
+    max-width: 560px;
+    margin-bottom: 40px;
+    line-height: 1.6;
+  }
+  .hero-meta {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .hero-meta-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: rgba(255,255,255,.75);
+    font-family: 'Google Sans', sans-serif;
+  }
+  .hero-meta-item .material-icons-round { font-size: 16px; opacity: .7; }
+
+  /* ── MAIN LAYOUT ── */
+  .main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  /* ── SEVERITY SUMMARY ── */
+  .severity-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+  .severity-card {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    padding: 28px 24px;
+    box-shadow: var(--shadow-1);
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    border-top: 4px solid transparent;
+    transition: box-shadow .2s, transform .2s;
+    cursor: default;
+  }
+  .severity-card:hover { box-shadow: var(--shadow-3); transform: translateY(-2px); }
+  .severity-card.critical { border-top-color: var(--red-600); }
+  .severity-card.high     { border-top-color: var(--amber-500); }
+  .severity-card.improve  { border-top-color: var(--green-500); }
+  .sev-icon {
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .severity-card.critical .sev-icon { background: var(--red-50);   color: var(--red-700); }
+  .severity-card.high     .sev-icon { background: var(--amber-50); color: var(--amber-700); }
+  .severity-card.improve  .sev-icon { background: var(--green-50); color: var(--green-700); }
+  .sev-icon .material-icons-round { font-size: 24px; }
+  .sev-count {
+    font-family: 'Google Sans Display', sans-serif;
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--grey-900);
+  }
+  .sev-label {
+    font-family: 'Google Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--grey-700);
+    margin-top: 4px;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+  }
+  .sev-desc {
+    font-size: 13px;
+    color: var(--grey-500);
+    margin-top: 6px;
+    line-height: 1.5;
+  }
+
+  /* ── SECTIONS ── */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 48px 0 24px;
+  }
+  .section-number {
+    width: 32px; height: 32px;
+    background: var(--blue-700);
+    color: var(--white);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Google Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .section-header h2 {
+    font-family: 'Google Sans Display', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--grey-900);
+    letter-spacing: -.3px;
+  }
+
+  /* ── STACK CHIPS ── */
+  .stack-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 32px;
+  }
+  .stack-chip {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--white);
+    border: 1px solid var(--grey-300);
+    border-radius: 100px;
+    padding: 6px 14px 6px 10px;
+    font-size: 13px;
+    font-family: 'Google Sans', sans-serif;
+    font-weight: 500;
+    color: var(--grey-800);
+    box-shadow: var(--shadow-1);
+  }
+  .stack-chip .material-icons-round { font-size: 16px; color: var(--blue-700); }
+
+  /* ── FINDING CARDS ── */
+  .findings-list { display: flex; flex-direction: column; gap: 20px; }
+  .finding-card {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-1);
+    overflow: hidden;
+    transition: box-shadow .2s;
+  }
+  .finding-card:hover { box-shadow: var(--shadow-2); }
+  .finding-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 20px 24px 16px;
+  }
+  .finding-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border-radius: 100px;
+    padding: 4px 12px 4px 8px;
+    font-size: 11px;
+    font-family: 'Google Sans', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .6px;
+    flex-shrink: 0;
+  }
+  .finding-badge .material-icons-round { font-size: 14px; }
+  .finding-badge.critical { background: var(--red-50);   color: var(--red-700); }
+  .finding-badge.high     { background: var(--amber-50); color: var(--amber-700); }
+  .finding-badge.improve  { background: var(--green-50); color: var(--green-700); }
+  .finding-title {
+    font-family: 'Google Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--grey-900);
+    line-height: 1.4;
+  }
+  .finding-body { padding: 0 24px 24px; }
+  .finding-divider { height: 1px; background: var(--grey-100); margin-bottom: 20px; }
+
+  .finding-rows { display: flex; flex-direction: column; gap: 0; }
+  .finding-row {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 0;
+    border-bottom: 1px solid var(--grey-100);
+  }
+  .finding-row:last-child { border-bottom: none; }
+  .finding-row-label {
+    padding: 14px 16px 14px 0;
+    font-size: 12px;
+    font-family: 'Google Sans', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    color: var(--grey-500);
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    padding-right: 20px;
+  }
+  .finding-row-label .material-icons-round { font-size: 14px; margin-top: 1px; }
+  .finding-row-content {
+    padding: 14px 0;
+    font-size: 14px;
+    color: var(--grey-800);
+    line-height: 1.6;
+    border-left: 1px solid var(--grey-100);
+    padding-left: 20px;
+  }
+  .finding-row.suggestion .finding-row-content { color: var(--blue-800); }
+  .finding-row.rationale  .finding-row-content { color: var(--teal-700); font-style: italic; }
+
+  /* ── SUBSECTION TITLE ── */
+  .subsection {
+    font-family: 'Google Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--grey-900);
+    margin: 36px 0 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .subsection::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--grey-300);
+  }
+  .subsection .material-icons-round { font-size: 18px; color: var(--blue-700); }
+
+  /* ── INFO CARD ── */
+  .info-card {
+    background: var(--blue-50);
+    border: 1px solid rgba(30,136,229,.2);
+    border-left: 4px solid var(--blue-600);
+    border-radius: var(--radius-sm);
+    padding: 16px 20px;
+    font-size: 14px;
+    color: var(--blue-900);
+    line-height: 1.6;
+    margin-bottom: 24px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .info-card .material-icons-round { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+
+  /* ── CROSS REF TABLE ── */
+  .ref-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    background: var(--white);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-1);
+    margin-bottom: 16px;
+  }
+  .ref-table thead {
+    background: var(--grey-900);
+    color: var(--white);
+  }
+  .ref-table thead th {
+    padding: 14px 20px;
+    text-align: left;
+    font-family: 'Google Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .6px;
+  }
+  .ref-table tbody tr { border-bottom: 1px solid var(--grey-100); }
+  .ref-table tbody tr:last-child { border-bottom: none; }
+  .ref-table tbody tr:hover { background: var(--grey-50); }
+  .ref-table tbody td {
+    padding: 14px 20px;
+    color: var(--grey-800);
+    line-height: 1.5;
+    vertical-align: top;
+  }
+  .ref-table tbody td:first-child {
+    font-family: 'Google Sans', sans-serif;
+    font-weight: 600;
+    color: var(--grey-900);
+    white-space: nowrap;
+  }
+
+  /* ── SEO TABLE ── */
+  .seo-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    background: var(--white);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-1);
+  }
+  .seo-table thead {
+    background: var(--blue-700);
+    color: var(--white);
+  }
+  .seo-table thead th {
+    padding: 14px 20px;
+    text-align: left;
+    font-family: 'Google Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .6px;
+  }
+  .seo-table tbody tr { border-bottom: 1px solid var(--grey-100); }
+  .seo-table tbody tr:last-child { border-bottom: none; }
+  .seo-table tbody tr:hover { background: var(--grey-50); }
+  .seo-table tbody td {
+    padding: 14px 20px;
+    color: var(--grey-800);
+    line-height: 1.5;
+    vertical-align: top;
+  }
+  .seo-table tbody td:first-child {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--grey-900);
+    white-space: nowrap;
+  }
+  .seo-table .status-bad {
+    color: var(--red-700);
+    font-weight: 500;
+  }
+  .seo-table .status-ok {
+    color: var(--green-700);
+    font-weight: 500;
+  }
+
+  /* ── ACTION PLAN ── */
+  .action-group {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-1);
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+  .action-group-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--grey-100);
+  }
+  .action-group-icon {
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .action-group-icon.critical { background: var(--red-50); color: var(--red-700); }
+  .action-group-icon.high     { background: var(--amber-50); color: var(--amber-700); }
+  .action-group-icon.improve  { background: var(--green-50); color: var(--green-700); }
+  .action-group-icon .material-icons-round { font-size: 22px; }
+  .action-group-title {
+    font-family: 'Google Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--grey-900);
+  }
+  .action-group-sub {
+    font-size: 13px;
+    color: var(--grey-500);
+    margin-top: 2px;
+  }
+  .action-list { list-style: none; }
+  .action-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 16px 24px;
+    border-bottom: 1px solid var(--grey-100);
+    transition: background .15s;
+  }
+  .action-item:last-child { border-bottom: none; }
+  .action-item:hover { background: var(--grey-50); }
+  .action-check {
+    width: 22px; height: 22px;
+    border: 2px solid var(--grey-300);
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .action-text {
+    font-size: 14px;
+    color: var(--grey-800);
+    line-height: 1.5;
+  }
+  .action-text strong {
+    font-weight: 600;
+    color: var(--grey-900);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--grey-900);
+    color: rgba(255,255,255,.6);
+    text-align: center;
+    padding: 40px 24px;
+    font-size: 13px;
+    line-height: 2;
+  }
+  footer strong { color: rgba(255,255,255,.9); }
+
+  /* ── UTIL ── */
+  .tag {
+    display: inline-block;
+    background: var(--grey-100);
+    color: var(--grey-700);
+    font-size: 11px;
+    font-family: 'Roboto Mono', monospace;
+    padding: 2px 8px;
+    border-radius: 4px;
+  }
+
+  @media (max-width: 768px) {
+    .severity-grid { grid-template-columns: 1fr; }
+    .finding-row { grid-template-columns: 1fr; }
+    .finding-row-content { border-left: none; padding-left: 0; border-top: 1px solid var(--grey-100); }
+    .hero { padding: 48px 24px 56px; }
+    nav { padding: 0 16px; }
+    .nav-subtitle { display: none; }
+    .nav-divider { display: none; }
+  }
+
+  /* Page load animation */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .animate { animation: fadeUp .5s ease both; }
+  .d1 { animation-delay: .05s; }
+  .d2 { animation-delay: .12s; }
+  .d3 { animation-delay: .19s; }
+  .d4 { animation-delay: .26s; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">
+    <div class="nav-logo"><span class="material-icons-round" style="font-size:18px;">monitor_heart</span></div>
+    <span class="nav-title">Tiquitaca</span>
+  </div>
+  <div class="nav-divider"></div>
+  <span class="nav-subtitle">Informe UX/UI · Virtualmedchile.cl · Mayo 2026</span>
+  <div class="nav-spacer"></div>
+  <span class="nav-chip">Confidencial</span>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner animate">
+    <div class="hero-label">
+      <span class="material-icons-round">description</span>
+      Informe UX/UI · Auditoría de Conversión
+    </div>
+    <h1>VirtualMed<span>chile.cl</span></h1>
+    <p class="hero-sub">Auditoría de experiencia de usuario, interfaz y flujo de conversión. Elaborado para orientar las correcciones previas al lanzamiento de campaña de invierno 2026.</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item"><span class="material-icons-round">business</span> Tiquitaca — agenciatiquitaca.cl</div>
+      <div class="hero-meta-item"><span class="material-icons-round">person</span> Para: Nicolás Canales</div>
+      <div class="hero-meta-item"><span class="material-icons-round">calendar_today</span> Mayo 2026</div>
+      <div class="hero-meta-item"><span class="material-icons-round">devices</span> Desktop + Mobile (Chrome / iPhone)</div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- 01 CONTEXTO -->
+  <div class="section-header animate d1">
+    <div class="section-number">01</div>
+    <h2>Contexto Estratégico</h2>
+  </div>
+
+  <div class="info-card animate d2">
+    <span class="material-icons-round">info</span>
+    <div>El objetivo del sitio es <strong>convertir visitantes en pacientes agendados</strong>. La métrica de éxito es el agendamiento completado — no el tiempo en el sitio ni el número de páginas vistas. Este informe se complementa con el Informe de Copywriting Web elaborado por Tiquitaca (mayo 2026) y ambos deben leerse de forma conjunta.</div>
+  </div>
+
+  <!-- Stack tecnológico -->
+  <div class="subsection animate d2"><span class="material-icons-round">code</span> Stack Tecnológico Identificado</div>
+  <div class="stack-grid animate d3">
+    <div class="stack-chip"><span class="material-icons-round">web</span> WordPress 6.8.3</div>
+    <div class="stack-chip"><span class="material-icons-round">palette</span> Impreza 8.34 (child theme)</div>
+    <div class="stack-chip"><span class="material-icons-round">view_quilt</span> WPBakery 7.3</div>
+    <div class="stack-chip"><span class="material-icons-round">text_fields</span> Nunito (Google Fonts)</div>
+    <div class="stack-chip"><span class="material-icons-round">event</span> Reservo.cl (iframe embed)</div>
+    <div class="stack-chip"><span class="material-icons-round">credit_card</span> Klap (pasarela de pago)</div>
+    <div class="stack-chip"><span class="material-icons-round">star</span> Font Awesome 5 + Material Icons</div>
+  </div>
+
+  <!-- Severity Summary -->
+  <div class="severity-grid animate d3">
+    <div class="severity-card critical">
+      <div class="sev-icon"><span class="material-icons-round">error</span></div>
+      <div>
+        <div class="sev-count">7</div>
+        <div class="sev-label">Crítico</div>
+        <div class="sev-desc">Bloquean la conversión o dañan la credibilidad. Corregir antes del lanzamiento de campaña.</div>
+      </div>
+    </div>
+    <div class="severity-card high">
+      <div class="sev-icon"><span class="material-icons-round">warning</span></div>
+      <div>
+        <div class="sev-count">6</div>
+        <div class="sev-label">Alto</div>
+        <div class="sev-desc">Reducen la confianza o generan fricción. Corregir en la primera semana de operación.</div>
+      </div>
+    </div>
+    <div class="severity-card improve">
+      <div class="sev-icon"><span class="material-icons-round">lightbulb</span></div>
+      <div>
+        <div class="sev-count">5</div>
+        <div class="sev-label">Mejora</div>
+        <div class="sev-desc">Optimizaciones de experiencia. Implementar progresivamente.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 02 REFERENCIA CRUZADA -->
+  <div class="section-header animate">
+    <div class="section-number">02</div>
+    <h2>Integración con Informe de Copywriting</h2>
+  </div>
+
+  <div class="info-card animate" style="background:var(--teal-50); border-left-color:var(--teal-500); border-color:rgba(0,150,136,.2); color:var(--teal-700);">
+    <span class="material-icons-round">link</span>
+    <div>Las secciones con problemas críticos de copy también presentan problemas de UX/UI documentados aquí. Se recomienda <strong>ejecutar ambas correcciones simultáneamente</strong> para no lanzar copy nuevo sobre una estructura deficiente.</div>
+  </div>
+
+  <table class="ref-table animate">
+    <thead>
+      <tr>
+        <th>Sección</th>
+        <th>Problema de Copy Identificado</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Hero</td><td>Titular genérico — no activa el concepto paraguas de marca</td></tr>
+      <tr><td>Especialidades</td><td>Descripción de catálogo sin emoción ni dolor del target</td></tr>
+      <tr><td>Equipo</td><td>Foto de stock con bata y estetoscopio (contra brief)</td></tr>
+      <tr><td>Agendamiento</td><td>Sección sin copy de contexto — título "Estamos para Cuidarte" repetido</td></tr>
+      <tr><td>FAQ</td><td>Preguntas placeholder — "¡Pregunta 1?" con signo de exclamación erróneo</td></tr>
+      <tr><td>Título de página</td><td>"Virtual Med – Medicina Online" (sin posicionamiento estratégico)</td></tr>
+    </tbody>
+  </table>
+
+  <!-- 03 HALLAZGOS -->
+  <div class="section-header animate">
+    <div class="section-number">03</div>
+    <h2>Hallazgos por Sección</h2>
+  </div>
+
+  <!-- 3.1 Navegación -->
+  <div class="subsection animate"><span class="material-icons-round">navigation</span> 3.1 Navegación y Header</div>
+  <div class="findings-list">
+
+    <div class="finding-card animate">
+      <div class="finding-header">
+        <div class="finding-badge critical"><span class="material-icons-round">error</span>Crítico</div>
+        <div class="finding-title">"Nuestro Equipo" en el menú lleva a href="#" — enlace roto</div>
+      </div>
+      <div class="finding-body">
+        <div class="finding-divider"></div>
+        <div class="finding-rows">
+          <div class="finding-row">
+            <div class="finding-row-label"><span class="material-icons-round">visibility</span>Observación</div>
+            <div class="finding-row-content">El ítem de menú "Nuestro Equipo" no tiene destino. En desktop muestra un dropdown vacío; en mobile no navega a ningún lugar. El código confirma <span class="tag">href="#"</span>. En responsive el logo de las isapres está sobredimensionado.</div>
+          </div>
+          <div class="finding-row suggestion">
+            <div class="finding-row-label"><span class="material-icons-round">build</span>Solución</div>
+            <div class="finding-row-content">Agregar <span class="tag">id="equipo"</span> a la sección de equipo o crear una página dedicada. El link del menú debe apuntar a ese anchor o página.</div>
+          </div>
+          <div class="finding-row rationale">
+            <div class="finding-row-label"><span class="material-icons-round">psychology</span>Por qué importa</div>
+            <div class="finding-row-content">El equipo médico es el activo de confianza más poderoso de Virtualmed. Prometérselo al usuario y no entregarlo genera desconfianza antes de que llegue al formulario de agendamiento.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="finding-card animate">
+      <div class="finding-header">
+        <div class="finding-badge high"><span class="material-icons-round">warning</span>Alto</div>
+        <div class="finding-title">Botón de WhatsApp (#25d366) rompe la paleta de marca</div>
+      </div>
+      <div class="finding-body">
+        <div class="finding-divider"></div>
+        <div class="finding-rows">
+          <div class="finding-row">
+            <div class="finding-row-label"><span class="material-icons-round">visibility</span>Observación</div>
+            <div class="finding-row-content">El botón de WhatsApp usa el verde oficial (<span class="tag">#25d366</span>), que contrasta fuertemente con el azul navy (<span class="tag">#2c306c</span>) y el teal (<span class="tag">#27afb7</span>) del sistema de marca. En desktop el efecto es de dos marcas distintas conviviendo en el header.</div>
+          </div>
+          <div class="finding-row suggestion">
+            <div class="finding-row-label"><span class="material-icons-round">build</span>Solución</div>
+            <div class="finding-row-content">Mantener el ícono de WhatsApp en su color original (reconocibilidad global), pero aplicar el mismo border-radius y tipografía del botón "Agendar Consulta". Alternativa: usar el verde solo como acento puntual con fondo blanco.</div>
+          </div>
+          <div class="finding-row rationale">
+            <div class="finding-row-label"><span class="material-icons-round">psychology</span>Por qué importa</div>
+            <div class="finding-row-content">Cada elemento que rompe el sistema de color genera una micro-fricción que erosiona la confianza acumulada.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end 3.1 -->
+
+  <!-- 3.2 Hero -->
+  <div class="subsection animate"><span class="material-icons-round">image</span> 3.2 Hero — Banner Principal</div>
+  <div class="findings-list">
+
+    <div class="finding-card animate">
+      <div class="finding-header">
+        <div class="finding-badge critical"><span class="material-icons-round">error</span>Crítico</div>
+        <div class="finding-title">Titular sin posicionamiento estratégico + copy genérico</div>
+      </div>
+      <div class="finding-body">
+        <div class="finding-divider"></div>
+        <div class="finding-rows">
+          <div class="finding-row">
+            <div class="finding-row-label"><span class="material-icons-round">visibility</span>Observación</div>
+            <div class="finding-row-content">"Cuidamos de ti, estés donde estés" es cálido pero no diferenciador. La bajada repite lo que cualquier competidor podría decir. No hay concepto de marca activado.</div>
+          </div>
+          <div class="finding-row suggestion">
+            <div class="finding-row-label"><span class="material-icons-round">build</span>Solución</div>
+            <div class="finding-row-content">Implementar el copy acordado: <strong>Titular →</strong> "El médico que vuelve a tu hogar". <strong>Bajada →</strong> "Somos el cuidado que siempre debió existir. Cercano, presente y disponible a la hora que tú necesites."</div>
+          </div>
+          <div class="finding-row rationale">
+            <div class="finding-row-label"><span class="material-icons-round">psychology</span>Por qué importa</div>
+            <div class="finding-row-content">El hero es el único mensaje que el 100% de los visitantes ven. Si no detiene el scroll y diferencia la propuesta en los primeros 3 segundos, el visitante ya comparó el precio con Examedi y tomó su decisión.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="finding-card animate">
+      <div class="finding-header">
+        <div class="finding-badge high"><span class="material-icons-round">warning</span>Alto</div>
+        <div class="finding-title">En mobile el overlay azul cubre el 70% de la foto</div>
+      </div>
+      <div class="finding-body">
+        <div class="finding-divider"></div>
+        <div class="finding-rows">
+          <div class="finding-row">
+            <div class="finding-row-label"><span class="material-icons-round">visibility</span>Observación</div>
+            <div class="finding-row-content">En mobile (390px), la caja azul ocupa casi toda la pantalla above the fold. La foto de fondo queda prácticamente invisible, perdiendo el efecto visual del hero.</div>
+          </div>
+          <div class="finding-row suggestion">
+            <div class="finding-row-label"><span class="material-icons-round">build</span>Solución</div>
+            <div class="finding-row-content">En <span class="tag">max-width: 600px</span>: reducir el padding del overlay o cambiar la disposición a columna (texto arriba, imagen debajo). Alternativa: imagen diferente para mobile con el sujeto en posición central.</div>
+          </div>
+          <div class="finding-row rationale">
+            <div class="finding-row-label"><span class="material-icons-round">psychology</span>Por qué importa</div>
+            <div class="finding-row-content">El 58% de las consultas de telemedicina en Chile son de mujeres entre 25–44 años que operan desde el teléfono. Si el hero no funciona en mobile, la campaña de Meta Ads pierde su punto de aterrizaje.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="finding-card animate">
+      <div class="finding-header">
+        <div class="finding-badge improve"><span class="material-icons-round">lightbulb</span>Mejora</div>
+        <div class="finding-title">"Servicio Profesional Garantizado" es una promesa vaga</div>
+      </div>
+      <div class="finding-body">
+        <div class="finding-divider"></div>
+        <div class="finding-rows">
+          <div class="finding-row">
+            <div class="finding-row-label"><span class="material-icons-round">visibility</span>Observación</div>
+            <div class="finding-row-content">El badge no aporta diferenciación — cualquier servicio podría usar esa frase. El Sello CENS es un certificador regulatorio real y más específico.</div>
+          </div>
+          <div class="finding-row suggestion">
+            <div class="finding-row-label"><span class="material-icons-round">build</span>Solución</div>
+            <div class="finding-row-content">Reemplazar el badge por "✓ Certificado CENS · Sello del Ministerio de Salud" o mostrar el logo del Sello CENS como elemento de confianza en el hero.</div>
+          </div>
+          <div class="finding-row rationale">
+            <div class="finding-row-label"><span class="material-icons-round">psychology</span>Por qué importa</div>
+            <div class="finding-row-content">Las señales de confianza específicas convierten más que los claims genéricos. "Certificado CENS" tiene un contexto legal que "Servicio Profesional Garantizado" no tiene.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end 3.2 -->
+
+  <!-- 3.3 Isapres -->
+  <div class="subsection animate"><span class="material-icons-round">health_and_safety</span> 3.3 Banda de Isapres / Convenios</div>
+  <div class="findings-list">
+    <div class="finding-card animate">
+      <div class="finding-header">
+        <div class="finding-badge high"><span class="material-icons-round">warning</span>Alto</div>
+        <div class="finding-title">Logos en gris pierden reconocibilidad — sin contexto explicativo</div>
+      </div>
+      <div class="finding-body">
+        <div class="finding-divider"></div>
+        <div class="finding-rows">
+          <div class="finding-row">
+            <div class="finding-row-label"><span class="material-icons-round">visibility</span>Observación</div>
+            <div class="finding-row-content">Los logos de Banmédica, Vida Tres, Colmena, Consalud, Cruz Blanca y Fonasa aparecen en gris monocromático sin ningún texto que explique qué significa que estén ahí.</div>
+          </div>
+          <div class="finding-row suggestion">
+            <div class="finding-row-label"><span class="material-icons-round">build</span>Solución</div>
+            <div class="finding-row-content">Agregar encabezado corto: "Compatible con tus seguros" o "Bonificable con:" seguido de los logos con sus colores originales. Opción: tooltip "Bono disponible para pacientes de estas Isapres".</div>
+          </div>
+          <div class="finding-row rationale">
+            <div class="finding-row-label"><span class="material-icons-round">psychology</span>Por qué importa</div>
+            <div class="finding-row-content">Sin contexto, el 60% de los usuarios no entiende qué significan esos logos. Son una señal de confianza y accesibilidad económica de altísimo valor para el target.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3.4 Beneficios -->
+  <div class="subsection animate"><span class="material-icons-round">verified</span> 3.4 Sección de Beneficios "Estamos para Cuidarte"</div>
+  <div class="findings-list">
+
+    <div class="finding-card animate">
+      <div class="finding-header">
+        <div class="finding-badge critical"><span class="material-icons-round">error</span>Crítico</div>
+        <div class="finding-title">Texto placeholder de WPBakery visible en producción pública</div>
+      </div>
+      <div class="finding-body">
+        <div class="finding-divider"></div>
+        <div class="finding-rows">
+          <div class="finding-row">
+            <div class="finding-row-label"><span class="material-icons-round">visibility</span>Observación</div>
+            <div class="finding-row-content">La columna izquierda contiene el texto literal del page builder, idéntico al de la bajada del hero. Sugiere un placeholder sin editar.</div>
+          </div>
+          <div class="finding-row suggestion">
+            <div class="finding-row-label"><span class="material-icons-round">build</span>Solución</div>
+            <div class="finding-row-content">Reemplazar completamente con copy estratégico diferente al del hero. Sugerencia: usar esta sección para hablar del equipo o del proceso ("¿Cómo funciona?").</div>
+          </div>
+          <div class="finding-row rationale">
+            <div class="finding-row-label"><span class="material-icons-round">psychology</span>Por qué importa</div>
+            <div class="finding-row-content">Contenido duplicado comunica falta de cuidado editorial. Si el usuario nota que el texto se repite, pierde confianza antes de llegar al formulario.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="finding-card animate">
+      <div class="finding-header">
+        <div class="finding-badge improve"><span class="material-icons-round">lightbulb</span>Mejora</div>
+        <div class="finding-title">Texto animado "Cuidarte / Acompañarte" genera inestabilidad visual</div>
+      </div>
+      <div class="finding-body">
+        <div class="finding-divider"></div>
+        <div class="finding-rows">
+          <div class="finding-row">
+            <div class="finding-row-label"><span class="material-icons-round">visibility</span>Observación</div>
+            <div class="finding-row-content">El título alterna entre dos palabras con animación cada 5 segundos. Aunque es un detalle creativo, puede desorientar y no aporta información adicional.</div>
+          </div>
+          <div class="finding-row suggestion">
+            <div class="finding-row-label"><span class="material-icons-round">build</span>Solución</div>
+            <div class="finding-row-content">Elegir un solo mensaje y fijarlo. Si se mantiene la animación, asegurar que ambas palabras alternantes tengan el mismo peso semántico.</div>
+          </div>
+          <div class="finding-row rationale">
+            <div class="finding-row-label"><span class="material-icons-round">psychology</span>Por qué importa</div>
+            <div class="finding-row-content">La consistencia de mensaje construye posicionamiento. Cada variación le pide al cerebro del usuario un esfuerzo adicional de interpretación.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 3.5 Especialidades -->
+  <div class="subsection animate"><span class="material-icons-round">medical_services</span> 3.5 Sección de Especialidades</div>
+  <div class="findings-list">
+
+    <div class="finding-card animate">
+      <div class="finding-header">
+        <div class="finding-badge critical"><span class="material-icons-round">error</span>Crítico</div>
+        <div class="finding-title">Los 3 botones "Agendar Consulta" de especialidades van a href="#"</div>
+      </div>
+      <div class="finding-body">
+        <div class="finding-divider"></div>
+        <div class="finding-rows">
+          <div class="finding-row">
+            <div class="finding-row-label"><span class="material-icons-round">visibility</span>Observación</div>
+            <div class="finding-row-content">Las tarjetas de Psicología, Medicina General y Salud Mental tienen cada una un botón "Agendar Consulta" que apunta a <span class="tag">href="#"</span> — no navegan a ningún lugar.</div>
+          </div>
+          <div class="finding-row suggestion">
+            <div class="finding-row-label"><span class="material-icons-round">build</span>Solución</div>
+            <div class="finding-row-content">Cada botón debe anclar directamente al widget de agendamiento (<span class="tag">#agenda</span>) pre-filtrando la especialidad si Reservo lo permite. Como mínimo: <span class="tag">href="#agenda"</span>.</div>
+          </div>
+          <div class="finding-row rationale">
+            <div class="finding-row-label"><span class="material-icons-round">psychology</span>Por qué importa</div>
+            <div class="finding-row-content">Cada CTA roto es una conversión perdida. Si un paciente con ansiedad toca "Agendar Consulta" en Salud Mental y nada ocurre, en el 80% de los casos no intenta buscarlo en otro lugar.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="finding-card animate">
+      <div class="finding-header">
+        <div class="finding-badge critical"><span class="material-icons-round">error</span>Crítico</div>
+        <div class="finding-title">Imagen de stock con bata y estetoscopio — contra el brief de marca</div>
+      </div>
+      <div class="finding-body">
+        <div class="finding-divider"></div>
+        <div class="finding-rows">
+          <div class="finding-row">
+            <div class="finding-row-label"><span class="material-icons-round">visibility</span>Observación</div>
+            <div class="finding-row-content">La foto principal muestra una doctora sonriente con bata blanca y estetoscopio. El brief de marca establece explícitamente: "Nada de médicos posando con batas, estetoscopios, hospitales."</div>
+          </div>
+          <div class="finding-row suggestion">
+            <div class="finding-row-label"><span class="material-icons-round">build</span>Solución</div>
+            <div class="finding-row-content">Reemplazar con fotografía real del equipo — sin bata si es posible, en entorno cotidiano con teléfono o pantalla. Si no hay fotos aún, usar imagen abstracta mientras se agenda la sesión fotográfica.</div>
+          </div>
+          <div class="finding-row rationale">
+            <div class="finding-row-label"><span class="material-icons-round">psychology</span>Por qué importa</div>
+            <div class="finding-row-content">La imagen de stock codifica exactamente lo que Virtualmed no quiere ser: medicina fría, institucional, distante. Contradice el concepto "El médico que vuelve a tu hogar" desde el primer golpe de vista.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 3.6 Placeholders -->
+  <div class="subsection animate"><span class="material-icons-round">text_snippet</span> 3.6 Secciones con Contenido Placeholder</div>
+  <div class="findings-list">
+    <div class="finding-card animate">
+      <div class="finding-header">
+        <div class="finding-badge critical"><span class="material-icons-round">error</span>Crítico</div>
+        <div class="finding-title">4 secciones con Lorem ipsum visible en producción pública</div>
+      </div>
+      <div class="finding-body">
+        <div class="finding-divider"></div>
+        <div class="finding-rows">
+          <div class="finding-row">
+            <div class="finding-row-label"><span class="material-icons-round">visibility</span>Observación</div>
+            <div class="finding-row-content">Las secciones <strong>Clientes</strong>, <strong>Agenda</strong>, <strong>Instagram</strong> y <strong>Preguntas Frecuentes</strong> tienen texto de placeholder de WPBakery visible. El sitio está activo y la campaña de Meta Ads está planificada para antes del 31 de mayo.</div>
+          </div>
+          <div class="finding-row suggestion">
+            <div class="finding-row-label"><span class="material-icons-round">build</span>Solución</div>
+            <div class="finding-row-content"><strong>Prioridad 1:</strong> reemplazar TODOS los placeholders antes de activar cualquier pauta pagada. (1) Clientes → sección Isapres con contexto. (2) Agenda → "¿Cómo agendar?" en 3 pasos. (3) Instagram → feed embed real o eliminar la sección. (4) FAQ → al menos 5 preguntas reales.</div>
+          </div>
+          <div class="finding-row rationale">
+            <div class="finding-row-label"><span class="material-icons-round">psychology</span>Por qué importa</div>
+            <div class="finding-row-content">Un sitio con Lorem ipsum visible destruye la credibilidad institucional en segundos. Ninguna inversión en pauta pagada es recuperable si el destino del anuncio tiene contenido de plantilla. Es el equivalente a abrir un consultorio con andamios adentro.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3.7 Agendamiento -->
+  <div class="subsection animate"><span class="material-icons-round">event_available</span> 3.7 Flujo de Agendamiento (Widget Reservo)</div>
+  <div class="findings-list">
+
+    <div class="finding-card animate">
+      <div class="finding-header">
+        <div class="finding-badge high"><span class="material-icons-round">warning</span>Alto</div>
+        <div class="finding-title">Paso 1 se llama "Selecciona Tratamiento" pero el campo dice "Selecciona Especialidad"</div>
+      </div>
+      <div class="finding-body">
+        <div class="finding-divider"></div>
+        <div class="finding-rows">
+          <div class="finding-row">
+            <div class="finding-row-label"><span class="material-icons-round">visibility</span>Observación</div>
+            <div class="finding-row-content">El stepper etiqueta el Paso 1 como "Selecciona Tratamiento". El primer dropdown dentro del paso dice "Selecciona Especialidad". El usuario ve dos nomenclaturas distintas para la misma acción.</div>
+          </div>
+          <div class="finding-row suggestion">
+            <div class="finding-row-label"><span class="material-icons-round">build</span>Solución</div>
+            <div class="finding-row-content">Unificar la terminología. Si el primer campo es de especialidad, el paso debe llamarse "Selecciona Especialidad". Revisar con el equipo de Reservo si la etiqueta es editable desde el panel de administración.</div>
+          </div>
+          <div class="finding-row rationale">
+            <div class="finding-row-label"><span class="material-icons-round">psychology</span>Por qué importa</div>
+            <div class="finding-row-content">La inconsistencia en labels crea incertidumbre cognitiva. El paciente que llega ansioso interpreta la inconsistencia como un error del sistema.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="finding-card animate">
+      <div class="finding-header">
+        <div class="finding-badge improve"><span class="material-icons-round">lightbulb</span>Mejora</div>
+        <div class="finding-title">Precios visibles sin contexto de qué incluye la consulta</div>
+      </div>
+      <div class="finding-body">
+        <div class="finding-divider"></div>
+        <div class="finding-rows">
+          <div class="finding-row">
+            <div class="finding-row-label"><span class="material-icons-round">visibility</span>Observación</div>
+            <div class="finding-row-content">Al seleccionar "Medicina General Fonasa Online", el sistema muestra duración 20 min y precio $12.850 sin contexto sobre qué incluye la consulta.</div>
+          </div>
+          <div class="finding-row suggestion">
+            <div class="finding-row-label"><span class="material-icons-round">build</span>Solución</div>
+            <div class="finding-row-content">Junto al precio agregar un tooltip: "¿Qué incluye?" que explique brevemente (consulta de 20 min, receta digital, certificado si aplica).</div>
+          </div>
+          <div class="finding-row rationale">
+            <div class="finding-row-label"><span class="material-icons-round">psychology</span>Por qué importa</div>
+            <div class="finding-row-content">El target compara precio con urgencia en el hospital (cero costo aparente, pero horas de espera). Contextualizar el precio con el valor concreto convierte una objeción en una decisión fácil.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="finding-card animate">
+      <div class="finding-header">
+        <div class="finding-badge improve"><span class="material-icons-round">lightbulb</span>Mejora</div>
+        <div class="finding-title">Horarios solo nocturnos visibles — diferenciador no comunicado</div>
+      </div>
+      <div class="finding-body">
+        <div class="finding-divider"></div>
+        <div class="finding-rows">
+          <div class="finding-row">
+            <div class="finding-row-label"><span class="material-icons-round">visibility</span>Observación</div>
+            <div class="finding-row-content">En la selección de hora, los horarios disponibles van de 20:20 a 22:40. Esto es un diferenciador competitivo real (atención nocturna), pero no está comunicado en ningún otro lugar del sitio.</div>
+          </div>
+          <div class="finding-row suggestion">
+            <div class="finding-row-label"><span class="material-icons-round">build</span>Solución</div>
+            <div class="finding-row-content">Agregar en la sección de beneficios un badge: "Atención hasta las 23:00 hrs" o "Consultas nocturnas disponibles".</div>
+          </div>
+          <div class="finding-row rationale">
+            <div class="finding-row-label"><span class="material-icons-round">psychology</span>Por qué importa</div>
+            <div class="finding-row-content">La mamá trabajadora con hijo enfermo a las 10 de la noche es exactamente quien más valora la atención nocturna. No comunicarlo es desperdiciar el diferenciador más práctico del servicio.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="finding-card animate">
+      <div class="finding-header">
+        <div class="finding-badge high"><span class="material-icons-round">warning</span>Alto</div>
+        <div class="finding-title">Paso 4 solo pide RUT — sin validación de formato ni campo de email</div>
+      </div>
+      <div class="finding-body">
+        <div class="finding-divider"></div>
+        <div class="finding-rows">
+          <div class="finding-row">
+            <div class="finding-row-label"><span class="material-icons-round">visibility</span>Observación</div>
+            <div class="finding-row-content">El último paso solicita únicamente el RUT del paciente, sin formateo automático (puntos y guión), sin validación de RUT chileno, y sin contexto de por qué se solicita. No hay campo de email para confirmación de cita.</div>
+          </div>
+          <div class="finding-row suggestion">
+            <div class="finding-row-label"><span class="material-icons-round">build</span>Solución</div>
+            <div class="finding-row-content">(1) Validación de formato <span class="tag">XX.XXX.XXX-X</span> en tiempo real. (2) Mensaje de contexto: "Tu RUT se usa para verificar tu beneficio Fonasa/Isapre". (3) Campo de email para enviar confirmación de cita.</div>
+          </div>
+          <div class="finding-row rationale">
+            <div class="finding-row-label"><span class="material-icons-round">psychology</span>Por qué importa</div>
+            <div class="finding-row-content">Sin validación pueden generarse errores de datos que afecten la operación. La ausencia de email impide el envío de recordatorios, uno de los principales reductores de inasistencia.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="finding-card animate">
+      <div class="finding-header">
+        <div class="finding-badge critical"><span class="material-icons-round">error</span>Crítico</div>
+        <div class="finding-title">Pantalla de pago con countdown de 15 minutos — ansiedad sin salida</div>
+      </div>
+      <div class="finding-body">
+        <div class="finding-divider"></div>
+        <div class="finding-rows">
+          <div class="finding-row">
+            <div class="finding-row-label"><span class="material-icons-round">visibility</span>Observación</div>
+            <div class="finding-row-content">El resumen de cita muestra "Se debe realizar el pago dentro de los próximos 15 minutos o se eliminará." No hay contador activo ni indica qué ocurre si se agota el tiempo.</div>
+          </div>
+          <div class="finding-row suggestion">
+            <div class="finding-row-label"><span class="material-icons-round">build</span>Solución</div>
+            <div class="finding-row-content">Opciones: (1) Agregar contador visual de cuenta regresiva. (2) Suavizar el mensaje: "Tienes 15 minutos para completar el pago. Si el tiempo se agota, podrás volver a elegir el horario." (3) Botón secundario "Agendar para más tarde" con recordatorio por WhatsApp.</div>
+          </div>
+          <div class="finding-row rationale">
+            <div class="finding-row-label"><span class="material-icons-round">psychology</span>Por qué importa</div>
+            <div class="finding-row-content">La pantalla de pago es donde mayor tasa de abandono ocurre. Generar ansiedad sin ofrecer una salida segura aumenta el abandono. El target necesita saber que puede volver sin perder el horario.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end 3.7 -->
+
+  <!-- 3.8 FAQ -->
+  <div class="subsection animate"><span class="material-icons-round">help_outline</span> 3.8 Preguntas Frecuentes</div>
+  <div class="findings-list">
+    <div class="finding-card animate">
+      <div class="finding-header">
+        <div class="finding-badge critical"><span class="material-icons-round">error</span>Crítico</div>
+        <div class="finding-title">"¡Pregunta 1?" — signo de exclamación, placeholder y Lorem ipsum en producción</div>
+      </div>
+      <div class="finding-body">
+        <div class="finding-divider"></div>
+        <div class="finding-rows">
+          <div class="finding-row">
+            <div class="finding-row-label"><span class="material-icons-round">visibility</span>Observación</div>
+            <div class="finding-row-content">Las tres preguntas muestran "¡Pregunta 1?" "¡Pregunta 2?" "¡Pregunta 3?" con respuestas Lorem ipsum. El signo ¡ de apertura es gramaticalmente incorrecto para una pregunta.</div>
+          </div>
+          <div class="finding-row suggestion">
+            <div class="finding-row-label"><span class="material-icons-round">build</span>Solución</div>
+            <div class="finding-row-content">Reemplazar con al menos 5 preguntas reales: (1) ¿Cómo recibo mi receta? (2) ¿Funciona con mi Isapre o Fonasa? (3) ¿Qué necesito para conectarme? (4) ¿Cuánto dura la consulta? (5) ¿Puedo pedir una licencia médica?</div>
+          </div>
+          <div class="finding-row rationale">
+            <div class="finding-row-label"><span class="material-icons-round">psychology</span>Por qué importa</div>
+            <div class="finding-row-content">El FAQ es la sección donde el usuario resuelve sus últimas dudas antes de agendar. Si está vacío, el usuario contacta por WhatsApp (más fricción) o abandona.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3.9 Footer -->
+  <div class="subsection animate"><span class="material-icons-round">web</span> 3.9 Footer</div>
+  <div class="findings-list">
+
+    <div class="finding-card animate">
+      <div class="finding-header">
+        <div class="finding-badge high"><span class="material-icons-round">warning</span>Alto</div>
+        <div class="finding-title">Email personal de Gmail expuesto públicamente en el footer</div>
+      </div>
+      <div class="finding-body">
+        <div class="finding-divider"></div>
+        <div class="finding-rows">
+          <div class="finding-row">
+            <div class="finding-row-label"><span class="material-icons-round">visibility</span>Observación</div>
+            <div class="finding-row-content">El footer muestra <span class="tag">dr.nicolasboza@gmail.com</span>: (1) no proyecta profesionalismo institucional, (2) es un vector de spam y phishing, (3) no corresponde al dominio virtualmedchile.cl.</div>
+          </div>
+          <div class="finding-row suggestion">
+            <div class="finding-row-label"><span class="material-icons-round">build</span>Solución</div>
+            <div class="finding-row-content">Crear cuenta profesional: <span class="tag">contacto@virtualmedchile.cl</span> o <span class="tag">info@virtualmedchile.cl</span>. Si se usa Gmail, configurar Google Workspace para usar el dominio propio.</div>
+          </div>
+          <div class="finding-row rationale">
+            <div class="finding-row-label"><span class="material-icons-round">psychology</span>Por qué importa</div>
+            <div class="finding-row-content">Un correo Gmail en el footer de una plataforma médica genera la misma percepción que un médico con consulta en su casa particular. El dominio propio comunica seriedad institucional.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="finding-card animate">
+      <div class="finding-header">
+        <div class="finding-badge improve"><span class="material-icons-round">lightbulb</span>Mejora</div>
+        <div class="finding-title">Copyright dice 2025 — debe ser 2026</div>
+      </div>
+      <div class="finding-body">
+        <div class="finding-divider"></div>
+        <div class="finding-rows">
+          <div class="finding-row">
+            <div class="finding-row-label"><span class="material-icons-round">visibility</span>Observación</div>
+            <div class="finding-row-content">El footer dice "Todos los derechos reservados – Virtual Med Chile 2025". Actualmente estamos en mayo de 2026.</div>
+          </div>
+          <div class="finding-row suggestion">
+            <div class="finding-row-label"><span class="material-icons-round">build</span>Solución</div>
+            <div class="finding-row-content">Actualizar a 2025–2026 o simplemente 2026. Editar desde Apariencia > Personalizar o directamente en el child theme.</div>
+          </div>
+          <div class="finding-row rationale">
+            <div class="finding-row-label"><span class="material-icons-round">psychology</span>Por qué importa</div>
+            <div class="finding-row-content">Un copyright desactualizado sugiere que el sitio no tiene mantenimiento activo, lo que reduce la confianza especialmente en un servicio de salud.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end 3.9 -->
+
+  <!-- 04 SEO -->
+  <div class="section-header animate">
+    <div class="section-number">04</div>
+    <h2>Hallazgos de SEO y Metadatos</h2>
+  </div>
+
+  <table class="seo-table animate">
+    <thead>
+      <tr>
+        <th>Campo</th>
+        <th>Estado Actual</th>
+        <th>Recomendación</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Title tag</td>
+        <td><span class="status-bad">Genérico: "Virtual Med – Medicina Online"</span></td>
+        <td>"Virtualmed | El médico que vuelve a tu hogar · Telemedicina Chile"</td>
+      </tr>
+      <tr>
+        <td>Meta description</td>
+        <td><span class="status-bad">No existe</span></td>
+        <td>"Consulta médica online en 20 min. Medicina General y Salud Mental. Certificado CENS. Sin traslados ni esperas. Agenda hoy." (155 caracteres)</td>
+      </tr>
+      <tr>
+        <td>og:image</td>
+        <td><span class="status-bad">Logo pequeño de check</span></td>
+        <td>Reemplazar con imagen del hero (1200×630px mínimo)</td>
+      </tr>
+      <tr>
+        <td>og:description</td>
+        <td><span class="status-bad">No existe</span></td>
+        <td>Agregar la misma meta description</td>
+      </tr>
+      <tr>
+        <td>Canonical</td>
+        <td><span class="status-ok">Correcta (https://virtualmedchile.cl)</span></td>
+        <td>No requiere cambio</td>
+      </tr>
+      <tr>
+        <td>RSS Feed</td>
+        <td><span class="status-bad">Activo sin blog visible</span></td>
+        <td>Deshabilitar o crear sección de blog/artículos</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- 05 ACTION PLAN -->
+  <div class="section-header animate" style="margin-top:56px;">
+    <div class="section-number">05</div>
+    <h2>Plan de Acción Priorizado</h2>
+  </div>
+
+  <p style="font-size:14px; color:var(--grey-700); margin-bottom:28px;">Acciones organizadas por impacto en conversión y urgencia antes del lanzamiento de campaña de invierno <strong>(31 de mayo 2026)</strong>.</p>
+
+  <div class="action-group animate">
+    <div class="action-group-header">
+      <div class="action-group-icon critical"><span class="material-icons-round">error</span></div>
+      <div>
+        <div class="action-group-title">Crítico — Hacer antes de activar pauta pagada</div>
+        <div class="action-group-sub">7 acciones · Bloquean conversión o credibilidad</div>
+      </div>
+    </div>
+    <ul class="action-list">
+      <li class="action-item"><div class="action-check"></div><div class="action-text">Eliminar <strong>todos</strong> los textos Lorem ipsum / placeholder de secciones Clientes, Agenda, Instagram y FAQ</div></li>
+      <li class="action-item"><div class="action-check"></div><div class="action-text">Agregar <strong>href="#agenda"</strong> a los 3 botones "Agendar Consulta" de las tarjetas de especialidades</div></li>
+      <li class="action-item"><div class="action-check"></div><div class="action-text">Vincular <strong>"Nuestro Equipo"</strong> del menú a una sección real o anchor con id correspondiente</div></li>
+      <li class="action-item"><div class="action-check"></div><div class="action-text">Reemplazar <strong>imagen de stock</strong> (doctora con bata) por fotografía real del equipo Virtualmed</div></li>
+      <li class="action-item"><div class="action-check"></div><div class="action-text">Implementar <strong>copy estratégico del hero</strong> (titular + bajada) según Informe de Copywriting</div></li>
+      <li class="action-item"><div class="action-check"></div><div class="action-text">Actualizar <strong>title tag</strong> y agregar meta description en todas las páginas</div></li>
+      <li class="action-item"><div class="action-check"></div><div class="action-text">Suavizar <strong>mensaje de 15 minutos</strong> en pantalla de pago con contexto de recuperación de horario</div></li>
+    </ul>
+  </div>
+
+  <div class="action-group animate">
+    <div class="action-group-header">
+      <div class="action-group-icon high"><span class="material-icons-round">warning</span></div>
+      <div>
+        <div class="action-group-title">Alto — Semana 1 de operación</div>
+        <div class="action-group-sub">6 acciones · Reducen fricción y aumentan confianza</div>
+      </div>
+    </div>
+    <ul class="action-list">
+      <li class="action-item"><div class="action-check"></div><div class="action-text">Reemplazar <strong>email de Gmail</strong> por dirección de dominio propio (contacto@virtualmedchile.cl)</div></li>
+      <li class="action-item"><div class="action-check"></div><div class="action-text">Agregar contexto a la banda de logos de Isapres: <strong>"Bonificable con:"</strong></div></li>
+      <li class="action-item"><div class="action-check"></div><div class="action-text">Unificar terminología del stepper: <strong>"Selecciona Tratamiento" → "Selecciona Especialidad"</strong></div></li>
+      <li class="action-item"><div class="action-check"></div><div class="action-text">Agregar <strong>validación de formato RUT</strong> + campo de email en el paso 4 del agendamiento</div></li>
+      <li class="action-item"><div class="action-check"></div><div class="action-text">Revisar y unificar el <strong>color del botón WhatsApp</strong> con el sistema de marca</div></li>
+      <li class="action-item"><div class="action-check"></div><div class="action-text">Actualizar <strong>copyright</strong> de 2025 a 2026</div></li>
+    </ul>
+  </div>
+
+  <div class="action-group animate">
+    <div class="action-group-header">
+      <div class="action-group-icon improve"><span class="material-icons-round">lightbulb</span></div>
+      <div>
+        <div class="action-group-title">Mejora — Implementación progresiva</div>
+        <div class="action-group-sub">5 acciones · Optimizaciones de experiencia y conversión</div>
+      </div>
+    </div>
+    <ul class="action-list">
+      <li class="action-item"><div class="action-check"></div><div class="action-text">Agregar <strong>"Atención hasta las 23:00 hrs"</strong> como beneficio visible en hero o sección de beneficios</div></li>
+      <li class="action-item"><div class="action-check"></div><div class="action-text">Agregar tooltip <strong>"¿Qué incluye?"</strong> junto al precio en el paso 1 del agendamiento</div></li>
+      <li class="action-item"><div class="action-check"></div><div class="action-text">Reemplazar badge genérico por <strong>Sello CENS</strong> con logo del Ministerio de Salud</div></li>
+      <li class="action-item"><div class="action-check"></div><div class="action-text">Evaluar eliminar el texto animado y elegir <strong>un solo mensaje fijo</strong> para la sección de beneficios</div></li>
+      <li class="action-item"><div class="action-check"></div><div class="action-text">Configurar <strong>og:image</strong> con foto del hero en formato 1200×630px</div></li>
+    </ul>
+  </div>
+
+</div><!-- end main -->
+
+<footer>
+  <strong>Tiquitaca</strong> · agenciatiquitaca.cl · Confidencial<br>
+  Informe elaborado en mayo de 2026 para uso exclusivo de Virtualmed y su equipo de desarrollo.<br>
+  Para consultas sobre este informe contactar a través de agenciatiquitaca.cl
+</footer>
+
+</body>
+</html>
